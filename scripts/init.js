@@ -1,6 +1,5 @@
 // @flow
 /* eslint no-console: off */
-const appjson = require('../app.json')
 const fs = require('fs')
 const os = require('os')
 
@@ -34,21 +33,41 @@ const deleteFolderRecursive = path => {
   }
 }
 
+const adjustAppJson = appName => {
+  const appjson = require('../app.json')
+
+  const newAppJson = { ...appjson, expo: { ...appjson.expo, slug: appName, name: appName } }
+
+  const content = JSON.stringify(newAppJson, null, 2)
+
+  try {
+    fs.writeFileSync('app.json', content + os.EOL, 'utf8')
+    console.log('app.json file was saved!')
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const adjustPackageJson = appName => {
+  const packagejson = require('../package.json')
+
+  const { initapp, ...newScripts } = packagejson.scripts
+  const newAppJson = { ...packagejson, name: appName, scripts: newScripts }
+
+  const content = JSON.stringify(newAppJson, null, 2)
+
+  try {
+    fs.writeFileSync('package.json', content + os.EOL, 'utf8')
+    console.log('package.json file was saved!')
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 const appName = getAppName()
 
-const newAppJson = { ...appjson, expo: { ...appjson.expo, slug: appName, name: appName } }
+adjustAppJson(appName)
+adjustPackageJson(appName)
 
-const content = JSON.stringify(newAppJson, null, 2)
-console.log(content)
-
-fs.writeFile('app.json', content + os.EOL, 'utf8', err => {
-  if (err) {
-    console.log(err)
-    return
-  }
-
-  console.log('The file was saved!')
-
-  deleteFolderRecursive('.git')
-  deleteFolderRecursive('scripts')
-})
+deleteFolderRecursive('.git')
+deleteFolderRecursive('scripts')
