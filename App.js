@@ -1,23 +1,8 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// @flow
+const { getStorybookUI, configure } = require('@storybook/react-native')
+const { loadStories } = require('./stories')
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
-}
+configure(() => loadStories(), module)
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const StorybookUI = getStorybookUI({ port: 9001, onDeviceUI: false })
+export default StorybookUI
