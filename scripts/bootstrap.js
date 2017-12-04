@@ -22,7 +22,6 @@ const deleteFolderRecursive = path => {
     files.forEach(file => {
       const curPath = `${path}/${file}`
       if (fs.lstatSync(curPath).isDirectory()) {
-        console.log(curPath)
         deleteFolderRecursive(curPath)
       } else {
         fs.unlinkSync(curPath)
