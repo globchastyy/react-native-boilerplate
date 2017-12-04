@@ -51,7 +51,7 @@ const adjustAppJson = appName => {
 const adjustPackageJson = appName => {
   const packagejson = require('../package.json')
 
-  const { initapp, ...newScripts } = packagejson.scripts
+  const { bootstrap, ...newScripts } = packagejson.scripts
   const newAppJson = { ...packagejson, name: appName, scripts: newScripts }
 
   const content = JSON.stringify(newAppJson, null, 2)

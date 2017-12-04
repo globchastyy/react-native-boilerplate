@@ -17,7 +17,7 @@
     "eslint": "eslint src",
     "flow": "flow status",
     "make-all-prettier": "find ./src -name '*.js' | xargs yarn prettier --write",
-    "initapp": "node scripts/init"
+    "bootstrap": "node scripts/bootstrap"
   },
   "jest": {
     "preset": "jest-expo"
