@@ -5,6 +5,7 @@
     "no-use-before-define": "off",
     "global-require": "off",
     "prettier/prettier": "error",
+    "react/require-default-props": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   },
   "env": {
